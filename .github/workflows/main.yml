@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-python@v4
     # В action setup-python@v4 передаём параметр — версию Python
       with:
-        python-version: 3.12
+        python-version: 3.11
     # Обновляем pip, устанавливаем flake8 и flake8-isort, 
     # устанавливаем зависимости проекта
     - name: Install dependencies
@@ -65,7 +65,7 @@ jobs:
           # Для каждого пересобранного образа 
           # устанавливаем тег latest, чтобы потом
           # на сервере и в docker-compose.yml не указывать версию
-          tags: ваш-логин-на-docker-hub/taski_backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/taski_backend:latest
 
   frontend_tests:
     runs-on: ubuntu-latest
@@ -109,4 +109,4 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: username/taski_frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/taski_frontend:latest
